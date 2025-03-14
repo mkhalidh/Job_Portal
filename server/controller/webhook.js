@@ -1,7 +1,7 @@
 // logic for clerk webhooks
 
 import { Webhook } from "svix";
-import { User } from "../models/User.js";
+import User from "../models/User.js"; // ✅ Fix
 
 const clerkWebhook = async (req, res) => {
   try {
@@ -57,14 +57,12 @@ const clerkWebhook = async (req, res) => {
         break;
     }
   } catch (error) {
-
     console.log(error.message);
     res.json({
-        success:false,
-        message:"Webhooks Error"
+      success: false,
+      message: "Webhooks Error",
     });
   }
 };
-
 
 export default clerkWebhook;
