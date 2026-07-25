@@ -14,7 +14,6 @@
   "dependencies": {
     "@clerk/clerk-js": "^5.56.0",
     "@sentry/node": "^9.5.0",
-    "@sentry/profiling-node": "^9.5.0",
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.6.0",
     "cors": "^2.8.5",

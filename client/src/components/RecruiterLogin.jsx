@@ -10,7 +10,6 @@ const RecruiterLogin = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const [image, isSetImage] = useState(false);
   const [imagess, SetImage] = useState(null);
   const [isTextDataSubmitted, setIsTextDataSubmitted] = useState(false);
 
@@ -145,7 +144,7 @@ const RecruiterLogin = () => {
         )}
 
         <img
-          onClick={(e) => setShowRecruiterLogin(false)}
+          onClick={() => setShowRecruiterLogin(false)}
           className="absolute top-5 right-5 cursor-pointer"
           src={assets.cross_icon}
           alt=""

@@ -50,10 +50,11 @@ const AddJobs = () => {
           <select
             className="w-full px-3 py-2 border-2 border-gray-300 rounded"
             onChange={(e) => setCategory(e.target.value)}
+            value={category}
           >
-            {JobCategories.map((category, index) => (
-              <option value={category} key={index}>
-                {category}
+            {JobCategories.map((cat, index) => (
+              <option value={cat} key={index}>
+                {cat}
               </option>
             ))}
           </select>
@@ -63,11 +64,12 @@ const AddJobs = () => {
           <p className="mb-2">Job Location </p>
           <select
             className="w-full px-3 py-2 border-2 border-gray-300 rounded"
-            onChange={(e) => setCategory(e.target.value)}
+            onChange={(e) => setLocation(e.target.value)}
+            value={location}
           >
-            {JobLocations.map((location, index) => (
-              <option value={location} key={index}>
-                {location}
+            {JobLocations.map((loc, index) => (
+              <option value={loc} key={index}>
+                {loc}
               </option>
             ))}
           </select>
@@ -76,7 +78,8 @@ const AddJobs = () => {
           <p className="mb-2">Job Level </p>
           <select
             className="w-full px-3 py-2 border-2 border-gray-300 rounded"
-             onChange={(e) => setCategory(e.target.value)}
+            onChange={(e) => setLevel(e.target.value)}
+            value={level}
           >
             <option  value="Beginner Level">Beginner Level</option>
             <option value="Intermediate Level">Intermediate Level</option>
@@ -90,6 +93,7 @@ const AddJobs = () => {
         <input
         className="w-full px-3 py-2 border-2 border-gray-300 rounded sm:w-[120px]"
           onChange={(e) => setSalary(e.target.value)}
+          value={salary}
           type="Number"
           min="0"
           placeholder="2500"

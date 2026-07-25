@@ -32,7 +32,7 @@ const Application = () => {
                 <img src={assets.profile_upload_icon} alt="" />
               </label>
               <button
-                onClick={(e) => setIsEdit(false)}
+                onClick={() => setIsEdit(false)}
                 className="bg-green-100 border-green-400 border text-green-600 px-4 py-2 rounded-lg"
               >
                 Save
@@ -42,7 +42,9 @@ const Application = () => {
             <div className="flex gap-2">
               <a
                 className="bg-blue-100 text-blue-600 px-4 py-2 rounded-lg"
-                href=""
+                href={resume ? URL.createObjectURL(resume[0]) : "#"}
+                target="_blank"
+                rel="noreferrer"
               >
                 Resume
               </a>
@@ -71,36 +73,34 @@ const Application = () => {
             </tr>
           </thead>
           <tbody>
-            {jobsApplied.map((job, index) =>
-              true ? (
-                <tr>
-                  <td className="py-3 px-4 border-b flex gap-2  items-center">
-                    <img className="w-8 h-8" src={job.logo} alt={job.company} />
-                    {job.company}
-                  </td>
-                  <td className="py-2 px-4 border-b ">{job.title}</td>
-                  <td className="py-2 px-4 border-b max-sm:hidden">
-                    {job.location}
-                  </td>
-                  <td className="py-2 px-4 border-b max-sm:hidden">
-                    {moment(job.date).format("ll")}
-                  </td>
-                  <td className="py-2 px-4 border-b ">
-                    <span
-                      className={`${
-                        job.status === "Accepted"
-                          ? "bg-green-100 text-green-600"
-                          : job.status === "Rejected"
-                          ? "bg-red-100 text-red-500"
-                          : "bg-blue-100 text-blue-500"
-                      } px-4 py-1.5 rounded`}
-                    >
-                      {job.status}
-                    </span>
-                  </td>
-                </tr>
-              ) : null
-            )}
+            {jobsApplied.map((job, index) => (
+              <tr key={index}>
+                <td className="py-3 px-4 border-b flex gap-2  items-center">
+                  <img className="w-8 h-8" src={job.logo} alt={job.company} />
+                  {job.company}
+                </td>
+                <td className="py-2 px-4 border-b ">{job.title}</td>
+                <td className="py-2 px-4 border-b max-sm:hidden">
+                  {job.location}
+                </td>
+                <td className="py-2 px-4 border-b max-sm:hidden">
+                  {moment(job.date).format("ll")}
+                </td>
+                <td className="py-2 px-4 border-b ">
+                  <span
+                    className={`${
+                      job.status === "Accepted"
+                        ? "bg-green-100 text-green-600"
+                        : job.status === "Rejected"
+                        ? "bg-red-100 text-red-500"
+                        : "bg-blue-100 text-blue-500"
+                    } px-4 py-1.5 rounded`}
+                  >
+                    {job.status}
+                  </span>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

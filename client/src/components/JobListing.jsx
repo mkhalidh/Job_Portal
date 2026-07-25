@@ -72,7 +72,7 @@ const JobListing = () => {
                   <span className="inline-flex items-center gap-2.5 border bg-blue-50 border-blue-200 px-4 py-1.5 rounded ">
                     {searchFilter.title}
                     <img
-                      onClick={(e) =>
+                      onClick={() =>
                         setSearchFilter((prev) => ({ ...prev, title: "" }))
                       }
                       src={assets.cross_icon}
@@ -84,7 +84,7 @@ const JobListing = () => {
                   <span className="ml-2 inline-flex items-center gap-2.5 border bg-red-50 border-red-200  px-4 py-1.5 rounded ">
                     {searchFilter.location}
                     <img
-                      onClick={(e) =>
+                      onClick={() =>
                         setSearchFilter((prev) => ({ ...prev, location: "" }))
                       }
                       src={assets.cross_icon}
@@ -97,7 +97,7 @@ const JobListing = () => {
           )}
 
         <button
-          onClick={(e) => setShowFilter((prev) => !prev)}
+          onClick={() => setShowFilter((prev) => !prev)}
           className="px-6 py-1.5  rounded  border border-gray-400 lg:hidden"
         >
           {showFilter ? "Close" : "Filters"}

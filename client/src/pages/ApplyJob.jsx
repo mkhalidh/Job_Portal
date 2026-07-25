@@ -97,9 +97,7 @@ const ApplyJob = () => {
                   (job) =>
                     job._id !== JobData._id &&
                     job.companyId._id === JobData.companyId._id
-                    
                 )
-                .filter((job) => true)
                 .slice(0, 4)
                 .map((job, index) => (
                   
