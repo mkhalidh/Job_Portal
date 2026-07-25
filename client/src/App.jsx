@@ -1,5 +1,7 @@
   import React, { useContext } from "react";
   import { Route, Routes } from "react-router-dom";
+  import { ToastContainer } from "react-toastify";
+  import "react-toastify/dist/ReactToastify.css";
   import ApplyJob from "./pages/ApplyJob";
   import Home from "./pages/Home";
   import Application from "./pages/Application";
@@ -16,6 +18,7 @@
 
     return (
       <>
+        <ToastContainer position="top-center" autoClose={3000} />
         {showRecruiterLogin && <RecruiterLogin />}
         <Routes>
           <Route path="/" element={<Home />} />

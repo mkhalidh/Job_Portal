@@ -1,9 +1,23 @@
-import React from "react";
+import { useEffect } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { useUser, useClerk } from "@clerk/clerk-react";
 import { assets } from "../assets/assets";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { isLoaded, isSignedIn, user } = useUser();
+  const { signOut } = useClerk();
+
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      navigate("/");
+    }
+  }, [isLoaded, isSignedIn, navigate]);
+
+  if (!isLoaded || !isSignedIn) {
+    return null;
+  }
+
   return (
     <div className="min-h-screen">
       {/* Navbar for recruiter panel */}
@@ -16,16 +30,21 @@ const Dashboard = () => {
             alt="insider jobs"
           />
           <div className="flex items-center gap-3">
-            <p className="max-sm:hidden">Welcome, GreatStack</p>
+            <p className="max-sm:hidden">Welcome, {user.firstName || user.primaryEmailAddress?.emailAddress}</p>
             <div className="relative group">
               <img
                 className="w-8 border rounded-full"
-                src={assets.company_icon}
+                src={user.imageUrl || assets.company_icon}
                 alt="company icon"
               />
               <div className="absolute hidden group-hover:block top-0 right-0  z-10 text-black rounded pt-12 ">
                 <ul className="list-none m-0 p-2  bg-white rounded-md border text-sm ">
-                  <li className="py-1 px-2 cursor-pointer pr-10">Logout</li>
+                  <li
+                    onClick={() => signOut(() => navigate("/"))}
+                    className="py-1 px-2 cursor-pointer pr-10"
+                  >
+                    Logout
+                  </li>
                 </ul>
               </div>
             </div>

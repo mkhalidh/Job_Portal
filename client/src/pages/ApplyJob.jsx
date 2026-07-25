@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useUser, useClerk } from "@clerk/clerk-react";
+import { toast } from "react-toastify";
 import { AppContext } from "../context/AppContext";
 import Loading from "../components/Loading";
 import Navbar from "../components/Navbar";
@@ -12,8 +14,20 @@ const ApplyJob = () => {
   const { id } = useParams();
 
   const [JobData, setJobData] = useState(null);
+  const [isApplied, setIsApplied] = useState(false);
 
   const { jobs } = useContext(AppContext);
+  const { isSignedIn } = useUser();
+  const { openSignIn } = useClerk();
+
+  const handleApply = () => {
+    if (!isSignedIn) {
+      openSignIn({ afterSignInUrl: window.location.pathname });
+      return;
+    }
+    setIsApplied(true);
+    toast.success("Application submitted!");
+  };
 
   const fetchJob = async () => {
     const data = jobs.filter((job) => job._id === id);
@@ -68,8 +82,12 @@ const ApplyJob = () => {
             </div>
 
             <div className="flex flex-col justify-center text-end text-sm max-md:mx-auto max-md:text-center">
-              <button className="bg-blue-600 p-2.5 px-10 text-white rounded">
-                Apply Now
+              <button
+                onClick={handleApply}
+                disabled={isApplied}
+                className="bg-blue-600 disabled:bg-gray-400 p-2.5 px-10 text-white rounded"
+              >
+                {isApplied ? "Applied" : "Apply Now"}
               </button>
               <p className="mt-1 text-gray-600">
                 {" "}
@@ -85,8 +103,12 @@ const ApplyJob = () => {
                 className="rich-text"
                 dangerouslySetInnerHTML={{ __html: JobData.description }}
               ></div>
-              <button className="bg-blue-600 p-2.5 px-10 text-white rounded mt-10">
-                Apply Now
+              <button
+                onClick={handleApply}
+                disabled={isApplied}
+                className="bg-blue-600 disabled:bg-gray-400 p-2.5 px-10 text-white rounded mt-10"
+              >
+                {isApplied ? "Applied" : "Apply Now"}
               </button>
             </div>
             {/* Right sections more jobs */}

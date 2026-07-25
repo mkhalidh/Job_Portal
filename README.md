@@ -18,6 +18,16 @@ aren't wired up yet, so the job listings you see on the live demo are static
 sample data (`client/src/assets/assets.js`), not served from the database.
 That's the natural next thing to build on top of this.
 
+**Auth and the Apply flow are real, not mocked**: Recruiter Login and the
+general Login button both go through actual Clerk sign-in/sign-up (there's
+one shared account system - "recruiter" isn't a separate credential store,
+it's just the same signed-in user visiting `/dashboard`, which is now
+guarded and redirects home if you're not signed in). "Apply Now" checks
+you're signed in (prompting sign-in if not) and confirms the submission
+with a toast - but since there's no `Application` model on the backend yet,
+that confirmation isn't persisted anywhere. Both of these were previously
+inert UI with no logic behind the buttons at all.
+
 ## Tech stack
 
 | Layer | Technology |
